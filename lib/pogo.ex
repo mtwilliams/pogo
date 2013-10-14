@@ -1,4 +1,4 @@
-defmodule Noderize do
+defmodule Pogo do
 	def alive?(node) when is_binary(node) do
 		node |> binary_to_atom |> alive?
 	end
