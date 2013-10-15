@@ -63,7 +63,6 @@ function start_server {
 	fi
 }
 
-
 function console {
   if alive; then
     echo "$SERVER_NAME is already running"
@@ -94,6 +93,24 @@ function server_status {
   fi
 }
 
+function restart_server {
+  if ! alive; then
+    echo "$SERVER_NAME is unreachable"
+    exit(1)
+  fi
+
+  $SCRIPT_PATH/elixir --name $CONTROL_NODE -pa ebin -e 'Pogo.restart "'$SERVER_NODE'"'
+}
+
+function reboot_server {
+  if ! alive; then
+    echo "$SERVER_NAME is unreachable"
+    exit(1)
+  fi
+
+  $SCRIPT_PATH/elixir --name $CONTROL_NODE -pa ebin -e 'Pogo.reboot "'$SERVER_NODE'"'
+}
+
 case "$1" in
 	stop)
 		stop_server
@@ -111,6 +128,12 @@ case "$1" in
     ;;
   status)
     server_status
+    ;;
+  restart)
+    restart_server
+    ;;
+  reboot)
+    reboot_server
     ;;
 esac
 
