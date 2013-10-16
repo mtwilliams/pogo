@@ -1,5 +1,5 @@
-#! /bin/sh
+#!/bin/sh
 
 SCRIPT_DIR=`dirname $0`
 
-`which iex` -pa "$SCRIPT_DIR/../../../ebin" "$@"
+iex -pa "$SCRIPT_DIR/../../../ebin" "$@"

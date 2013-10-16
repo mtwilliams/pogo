@@ -1,9 +1,6 @@
 defmodule Pogo do
-  def alive?(node) when is_binary(node) do
-    node |> binary_to_atom |> alive?
-  end
   def alive?(node) do
-    :pong == :net_adm.ping(node)
+    :net_adm.ping(node) == :pong
   end
 
   def alive!(node) do
@@ -11,7 +8,7 @@ defmodule Pogo do
     exit(0)
   end
 
-  def stop(node, timeout // 2000) do
+  def stop(node, timeout // 5000) do
     rpc(node, :init, :stop, timeout)
   end
 
@@ -23,18 +20,7 @@ defmodule Pogo do
     rpc(node, :init, :reboot, timeout)
   end
 
-  defp halt(status), do: :erlang.halt status
-
-  defp rpc(node, mod, fun, timeout) do
-    rpc(node, mod, fun, [], timeout)
-  end
-
-  defp rpc(node, mod, fun, args, timeout) when is_binary(node) do
-    node 
-    |> binary_to_atom
-    |> rpc(mod, fun, args, timeout)
-  end
-  defp rpc(node, mod, fun, args, timeout) do
+  defp rpc(node, mod, fun, args // [], timeout) do
     case :rpc.call(node, mod, fun, args, timeout) do
       :ok ->
         wait_for_node(node, timeout)
@@ -54,14 +40,16 @@ defmodule Pogo do
 
   defp wait_for_node(node, interval, acc_wait, timeout) do
     if alive?(node) do
-      ref = :erlang.make_ref
-      self = Process.self
-      :erlang.send_after(interval, self, { self, ref })
+      pid = self
+      ref = make_ref
+      :erlang.send_after(interval, pid, { pid, ref })
       receive do
-        { ^self, ^ref } ->
+        { ^pid, ^ref } ->
           acc_wait = acc_wait + interval
           wait_for_node(node, interval, acc_wait, timeout)
       end
     end
   end
+
+  defp halt(status), do: System.halt(status)
 end

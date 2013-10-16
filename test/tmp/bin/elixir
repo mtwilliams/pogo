@@ -1,5 +1,5 @@
-#! /bin/sh
+#!/bin/sh
 
 SCRIPT_DIR=`dirname $0`
 
-`which elixir` -pa "$SCRIPT_DIR/../../../ebin" "$@"
+elixir -pa "$SCRIPT_DIR/../../../ebin" "$@"

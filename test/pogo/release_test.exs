@@ -1,16 +1,20 @@
-defmodule CtlTest do
+defmodule Pogo.ReleaseTest do
   use ExUnit.Case
 
-  teardown do
+  @script_path Path.expand("../tmp/bin/pogo", __DIR__)
+
+  setup do
+    if File.exists?(@script_path), do: File.rm!(@script_path)
+    Pogo.Release.write(:pogo, @script_path)
+    :ok
+  end
+
+  teardown(_) do
     cmd("stop")
     :ok
   end
 
   test :cmds do
-    path = "test/tmp/bin/ctl"
-    if File.exists?(path), do: File.rm!(path)
-    Pogo.Ctl.write(path, :pogo)
-
     assert "pogo could not be reached\n" == cmd("status")
 
     case cmd("start") do
@@ -26,6 +30,6 @@ defmodule CtlTest do
   end
 
   defp cmd(args) do
-    System.cmd("test/tmp/bin/ctl #{args}")
+    System.cmd("#{@script_path} #{args}")
   end
 end
