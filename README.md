@@ -30,8 +30,9 @@ Any arguments passed to the script will be fed to the `erl` executable.
 - **start**: calls `:init.start` on your node
 - **stop**: calls `:init.stop` on your node
 - **restart**: calls `:init.restart` on our node
-- **reboot**: calls `:init.reboot` on your node. *Notice* if heartbeat isn't enabled
-	running this command will result in your node stopping, but not restarting
+- **reboot**: calls `:init.reboot` on your node. *Notice*: If heartbeat isn't
+  enabled, running this command will result in your node stopping,
+  but not arestarting
 - **console**: loads up your node in `iex`. When `iex` quits, your node does too
 - **attach**: `iex --remsh` onto your node. Quiting this does not affect your node
 - **status**: checks if your node is reachable and responding to pings (probably
