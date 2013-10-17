@@ -36,7 +36,7 @@ Any arguments passed to the script will be fed to the `erl` executable.
 - **console**: loads up your node in `iex`. When `iex` quits, your node does too
 - **attach**: `iex --remsh` onto your node. Quiting this does not affect your node
 - **status**: checks if your node is reachable and responding to pings (probably
-	should check if your app is running via `:application.which_applications`, too)
+  should check if your app is running via `:application.which_applications`, too)
 
 [1]: https://github.com/interline/relex "Interline's fork of yrashk/relex"
 [2]: https://github.com/yrashk/relex
