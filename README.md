@@ -11,7 +11,7 @@ The best way to use Pogo is in conjunction with Interline's [fork][1] of
 release like this in your Mix project:
 
 ```elixir
-def Release do
+defmodule Release do
   use Relex.Release
   use Pogo.Release
 end
