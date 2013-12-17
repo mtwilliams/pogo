@@ -1,4 +1,4 @@
-defmodule Noderize.Mixfile do
+defmodule Pogo.Mixfile do
   use Mix.Project
 
   def project do
