@@ -6,9 +6,9 @@ application packaged as an Erlang release.
 
 ## Including it in your release
 
-The best way to use Pogo is in conjunction with Interline's [fork][1] of
-[Relex][2]. All you need to do is include Pogo in your deps and create a
-release like this in your Mix project:
+The best way to use Pogo is in conjunction with the `start_clean` branch of
+Interline's [fork][1] of [Relex][2]. All you need to do is include Pogo in
+your deps and create a release like this in your Mix project:
 
 ```elixir
 defmodule Release do
