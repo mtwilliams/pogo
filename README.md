@@ -14,8 +14,14 @@ your deps and create a release like this in your Mix project:
 defmodule Release do
   use Relex.Release
   use Pogo.Release
+
+  def applications do
+  	[:pogo, Mix.project[:app]]
+  end
 end
 ```
+
+**Note** Don't forget to add `:pogo` to the list of applications in your release.
 
 ## Starting your release
 
