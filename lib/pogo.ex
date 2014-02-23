@@ -8,19 +8,19 @@ defmodule Pogo do
     exit(0)
   end
 
-  def stop(node, timeout // 5000) do
+  def stop(node, timeout \\ 5000) do
     rpc(node, :init, :stop, timeout)
   end
 
-  def restart(node, timeout // 10000) do
+  def restart(node, timeout \\ 10000) do
     rpc(node, :init, :restart, timeout)
   end
 
-  def reboot(node, timeout // 10000) do
+  def reboot(node, timeout \\ 10000) do
     rpc(node, :init, :reboot, timeout)
   end
 
-  defp rpc(node, mod, fun, args // [], timeout) do
+  defp rpc(node, mod, fun, args \\ [], timeout) do
     case :rpc.call(node, mod, fun, args, timeout) do
       :ok ->
         wait_for_node(node, timeout)
