@@ -2,4 +2,4 @@
 
 SCRIPT_DIR=`dirname $0`
 
-elixir -pa "$SCRIPT_DIR/../../../ebin" "$@"
+elixir -pa "$SCRIPT_DIR/../../../_build/shared/lib/*/ebin" "$@"
