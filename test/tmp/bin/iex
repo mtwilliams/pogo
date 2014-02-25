@@ -2,4 +2,4 @@
 
 SCRIPT_DIR=`dirname $0`
 
-iex -pa "$SCRIPT_DIR/../../../_build/shared/lib/*/ebin" "$@"
+iex -pa "$SCRIPT_DIR/../../../_build/test/lib/*/ebin" "$@"
