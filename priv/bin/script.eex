@@ -58,7 +58,7 @@ stop() {
     exit 0
   fi
 
-  $SCRIPT_PATH/elixir --name $CONTROL_NODE -pa ebin -e 'Pogo.stop :"'$SERVER_NODE'"'
+  $SCRIPT_PATH/elixir --name $CONTROL_NODE -e 'Pogo.stop :"'$SERVER_NODE'"'
 
   if [ $? ]; then
     echo "$APP has stopped"
@@ -73,7 +73,7 @@ restart() {
     exit 1
   fi
 
-  $SCRIPT_PATH/elixir --name $CONTROL_NODE -pa ebin -e 'Pogo.restart :"'$SERVER_NODE'"'
+  $SCRIPT_PATH/elixir --name $CONTROL_NODE -e 'Pogo.restart :"'$SERVER_NODE'"'
 }
 
 reboot() {
@@ -82,7 +82,7 @@ reboot() {
     exit 1
   fi
 
-  $SCRIPT_PATH/elixir --name $CONTROL_NODE -pa ebin -e 'Pogo.reboot :"'$SERVER_NODE'"'
+  $SCRIPT_PATH/elixir --name $CONTROL_NODE -e 'Pogo.reboot :"'$SERVER_NODE'"'
 }
 
 console() {
