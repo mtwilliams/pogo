@@ -5,7 +5,7 @@ set -e
 readlink_f() {
   cd "$(dirname "$1")" > /dev/null
 
-  local filename="$(basename "$1")"
+  filename="$(basename "$1")"
 
   if [ -h "$filename" ]; then
     readlink_f "$(readlink "$filename")"
@@ -19,7 +19,11 @@ SCRIPT_PATH=$(dirname "$SELF")
 RELEASE_PATH=$(dirname "$SCRIPT_PATH")
 
 APP=<%= app %>
-HOSTNAME=`hostname -f`
+if [ `uname -s` = 'SunOS' ]; then
+  HOSTNAME=`hostname`
+else
+  HOSTNAME=`hostname -f`
+fi
 SERVER_NODE=$APP@$HOSTNAME
 CONTROL_NODE=$APP$$@$HOSTNAME
 
